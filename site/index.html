@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="commit" content="{{ commit }}">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header>
+      <p>GitHub Actions na prática</p>
+      <h1>{{ title }}</h1>
+      <p>Do primeiro workflow à entrega contínua.</p>
+    </header>
+    <nav aria-label="Conceitos do exercício">{{ navigation }}</nav>
+    <main>{{ content }}</main>
+    <footer>Publicado pelo GitHub Actions · Commit: <code>{{ commit }}</code></footer>
+  </body>
+</html>

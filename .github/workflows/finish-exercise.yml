@@ -1,0 +1,36 @@
+# Adaptação local do ciclo do skills/exercise-toolkit: revisão e conclusão em pt-BR.
+name: Concluir exercício
+
+on:
+  workflow_call:
+    inputs:
+      evidence:
+        description: Publicação aprovada no Passo 5
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+jobs:
+  finish:
+    name: Publicar a revisão e registrar a conclusão
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obter o tutor da branch principal
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Instalar dependências do tutor
+        run: npm ci --prefix .github/tutor --ignore-scripts --no-audit --no-fund
+      - name: Concluir sem duplicar mensagens
+        uses: actions/github-script@v9
+        env:
+          EVIDENCE: ${{ inputs.evidence }}
+        with:
+          script: |
+            await require('./.github/tutor/lifecycle.cjs').finish({ github, context, core });

@@ -1,0 +1,56 @@
+name: Avaliar atividade
+
+on:
+  workflow_call:
+    inputs:
+      step:
+        description: Número da etapa
+        required: true
+        type: number
+    outputs:
+      passed:
+        description: Indica se todas as verificações passaram
+        value: ${{ jobs.check.outputs.passed }}
+      evidence:
+        description: Execução e commit avaliados
+        value: ${{ jobs.check.outputs.evidence }}
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+  pull-requests: read
+  deployments: read
+  pages: read
+
+jobs:
+  check:
+    name: Conferir a atividade e publicar o resultado
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      passed: ${{ steps.grade.outputs.passed }}
+      evidence: ${{ steps.grade.outputs.evidence }}
+    steps:
+      - name: Obter somente o tutor da branch principal
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Instalar dependências isoladas do tutor
+        run: npm ci --prefix .github/tutor --ignore-scripts --no-audit --no-fund
+      - name: Avaliar sem executar o código do participante
+        id: grade
+        continue-on-error: true
+        uses: actions/github-script@v9
+        env:
+          STEP: ${{ inputs.step }}
+          SITE_TITLE: ${{ vars.SITE_TITLE }}
+        with:
+          script: |
+            await require('./.github/tutor/grade.cjs').grade({ github, context, core });
+      - name: Manter a etapa atual quando houver falha
+        if: steps.grade.outcome == 'failure'
+        run: |
+          echo "A avaliação falhou. Confira a issue e os logs acima antes de tentar novamente."
+          exit 1

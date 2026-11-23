@@ -1,0 +1,13 @@
+{
+  "name": "tutor-github-actions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Avaliação e mensagens do exercício; separado do projeto do participante.",
+  "scripts": {
+    "test": "node --test test/*.test.cjs"
+  },
+  "dependencies": {
+    "nunjucks": "3.2.4",
+    "yaml": "2.9.1"
+  }
+}

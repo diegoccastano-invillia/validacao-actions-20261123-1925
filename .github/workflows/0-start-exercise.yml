@@ -1,0 +1,24 @@
+name: Passo 0
+
+on:
+  workflow_dispatch:
+  # O primeiro push da cópia inicia o exercício. O job ignora o template, e o
+  # tutor desabilita este workflow depois do início para não rodar a cada merge.
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: tutor-exercicio
+  cancel-in-progress: false
+
+jobs:
+  start_exercise:
+    name: Iniciar exercício
+    if: ${{ !github.event.repository.is_template }}
+    uses: ./.github/workflows/start-exercise.yml
+    permissions:
+      contents: write
+      actions: write
+      issues: write

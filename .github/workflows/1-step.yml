@@ -1,0 +1,50 @@
+name: Passo 1
+
+on:
+  push:
+    branches: [welcome-workflow]
+    paths: [.github/workflows/welcome.yml]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: tutor-exercicio
+  cancel-in-progress: false
+
+jobs:
+  find_exercise:
+    name: Localizar exercício
+    if: ${{ !github.event.repository.is_template }}
+    uses: ./.github/workflows/find-exercise.yml
+    with:
+      step: 1
+    permissions:
+      contents: read
+      issues: read
+  check_step_work:
+    name: Avaliar atividade
+    needs: find_exercise
+    if: needs.find_exercise.outputs.active == 'true'
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 1
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+      pull-requests: read
+      deployments: read
+      pages: read
+  post_next_step_content:
+    name: Publicar próxima atividade
+    needs: [find_exercise, check_step_work]
+    if: needs.check_step_work.outputs.passed == 'true'
+    uses: ./.github/workflows/next-step.yml
+    with:
+      step: 1
+      evidence: ${{ needs.check_step_work.outputs.evidence }}
+    permissions:
+      contents: read
+      actions: write
+      issues: write

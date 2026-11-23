@@ -1,0 +1,14 @@
+{
+  "name": "portal-da-equipe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Projeto inicial do exercício de GitHub Actions.",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "node scripts/build.js"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

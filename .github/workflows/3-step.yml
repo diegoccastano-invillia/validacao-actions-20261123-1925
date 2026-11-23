@@ -1,0 +1,55 @@
+name: Passo 3
+
+on:
+  push:
+    branches: [ci-pipeline]
+    paths:
+      - .github/workflows/ci.yml
+      - src/**
+      - test/**
+      - package.json
+      - package-lock.json
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: tutor-exercicio
+  cancel-in-progress: false
+
+jobs:
+  find_exercise:
+    name: Localizar exercício
+    if: ${{ !github.event.repository.is_template }}
+    uses: ./.github/workflows/find-exercise.yml
+    with:
+      step: 3
+    permissions:
+      contents: read
+      issues: read
+  check_step_work:
+    name: Avaliar atividade
+    needs: find_exercise
+    if: needs.find_exercise.outputs.active == 'true'
+    uses: ./.github/workflows/check-step.yml
+    with:
+      step: 3
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+      pull-requests: read
+      deployments: read
+      pages: read
+  post_next_step_content:
+    name: Publicar próxima atividade
+    needs: [find_exercise, check_step_work]
+    if: needs.check_step_work.outputs.passed == 'true'
+    uses: ./.github/workflows/next-step.yml
+    with:
+      step: 3
+      evidence: ${{ needs.check_step_work.outputs.evidence }}
+    permissions:
+      contents: read
+      actions: write
+      issues: write

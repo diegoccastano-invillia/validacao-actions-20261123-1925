@@ -1,0 +1,39 @@
+name: Localizar exercício
+
+on:
+  workflow_call:
+    inputs:
+      step:
+        description: Número da etapa
+        required: true
+        type: number
+    outputs:
+      active:
+        description: Indica se esta etapa está ativa
+        value: ${{ jobs.find.outputs.active }}
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  find:
+    name: Conferir o progresso
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      active: ${{ steps.find.outputs.active }}
+    steps:
+      - name: Obter o tutor da branch principal
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Localizar a issue do exercício
+        id: find
+        uses: actions/github-script@v9
+        env:
+          STEP: ${{ inputs.step }}
+        with:
+          script: |
+            await require('./.github/tutor/state.cjs').discover({ github, context, core });
