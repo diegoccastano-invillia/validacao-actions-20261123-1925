@@ -1,11 +1,13 @@
 # GitHub Actions: do primeiro workflow à entrega contínua
 
-Olá, @diegoccastano-invillia! A Mona preparou seu exercício.
+<img src="https://github.com/diegoccastano-invillia/validacao-actions-20261123-1925/blob/main/.github/images/inspectocat.png?raw=true" align="right" height="100px" alt="Octocat convidando para começar o exercício" />
 
-As instruções e os resultados estão em uma **issue**, uma página de conversa. Não é preciso conhecer Git: o Passo 1 explica como abrir o **Codespaces** (editor e terminal no navegador) e traz os comandos para começar.
+👋 Olá, @github-actions[bot]! Aqui é a Mona. Seu exercício está pronto. Espero que você goste! 💚
 
-Mantenha a issue, o Codespaces e a página deste repositório em abas separadas. Use o mesmo Codespaces durante todo o exercício; para retomá-lo, abra [Seus codespaces](https://github.com/codespaces).
+O ritmo é seu: faça uma etapa por vez e faça uma pausa quando quiser. Nas etapas, vou verificar seu trabalho, compartilhar as próximas instruções e dar dicas quando precisar.
 
-**[Abrir meu exercício](https://github.com/diegoccastano-invillia/validacao-actions-20261123-1925/issues/1)**
+[![Ir para o Exercício](https://img.shields.io/badge/Ir%20para%20o%20Exerc%C3%ADcio-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/diegoccastano-invillia/validacao-actions-20261123-1925/issues/1)
 
-Os workflows **Passo N** acompanham seu progresso. Você construirá os workflows **Boas-vindas** e **CI**.
+---
+
+© GitHub, Inc. · [Código de Conduta](https://www.contributor-covenant.org/pt-br/version/2/1/code_of_conduct/) · [Licença MIT](LICENSE)
