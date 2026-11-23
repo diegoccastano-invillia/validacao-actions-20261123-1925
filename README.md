@@ -2,7 +2,7 @@
 
 <img src="https://github.com/diegoccastano-invillia/validacao-actions-20261123-1925/blob/main/.github/images/inspectocat.png?raw=true" align="right" height="100px" alt="Octocat convidando para começar o exercício" />
 
-👋 Olá, @github-actions[bot]! Aqui é a Mona. Seu exercício está pronto. Espero que você goste! 💚
+👋 Olá, @diegoccastano-invillia! Aqui é a Mona. Seu exercício está pronto. Espero que você goste! 💚
 
 O ritmo é seu: faça uma etapa por vez e faça uma pausa quando quiser. Nas etapas, vou verificar seu trabalho, compartilhar as próximas instruções e dar dicas quando precisar.
 
